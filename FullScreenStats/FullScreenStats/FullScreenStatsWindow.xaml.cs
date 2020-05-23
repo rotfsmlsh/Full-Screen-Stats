@@ -1,7 +1,14 @@
 ﻿using FullScreenStats.Properties;
+using NvAPIWrapper.Display;
+using NvAPIWrapper.DRS.SettingValues;
+using NvAPIWrapper.GPU;
+using NvAPIWrapper.Native.Display.Structures;
+using NvAPIWrapper.Native.GPU.Structures;
+using NvAPIWrapper.Native.Interfaces.GPU;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +20,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.Xml.Linq;
 using WpfScreenHelper;
 
 namespace FullScreenStats {
@@ -54,20 +63,54 @@ namespace FullScreenStats {
 
         public void setColorFromString(String color) {
             if (color.Length > 0) {
-                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+                Background = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString(color));
             }
         }
 
-        public void setColor(Color selectedColor) {
+        public void setColor(System.Windows.Media.Color selectedColor) {
             Background = new SolidColorBrush(selectedColor);
         }
 
         private void enableSettings() {
-            lbl_time.Visibility = Settings.Default.show_systemTime == true ? Visibility.Visible : Visibility.Hidden;
-            lbl_fps.Visibility = Settings.Default.show_fps == true ? Visibility.Visible : Visibility.Hidden;
-            lbl_media.Visibility = Settings.Default.show_media == true ? Visibility.Visible : Visibility.Hidden;
-            lbl_networkStats.Visibility = Settings.Default.show_networkStats == true ? Visibility.Visible : Visibility.Hidden;
-            lbl_systemTemps.Visibility = Settings.Default.show_temps == true ? Visibility.Visible : Visibility.Hidden;
+            //System clock
+            if (Settings.Default.show_systemTime) {
+                configAndShowTime();
+            }
+            else {
+                lbl_time.Visibility = Visibility.Hidden;
+            }
+
+            //FPS display
+            if (Settings.Default.show_fps) {
+                configAndShowFPS();
+            }
+            else {
+                lbl_fps.Visibility = Visibility.Hidden;
+            }
+
+            //Media control/info
+            if (Settings.Default.show_media) {
+                lbl_media.Visibility = Visibility.Visible;
+            }
+            else {
+                lbl_media.Visibility = Visibility.Hidden;
+            }
+
+            //Network stats
+            if (Settings.Default.show_networkStats) {
+                lbl_networkStats.Visibility = Visibility.Visible;
+            }
+            else {
+                lbl_networkStats.Visibility = Visibility.Hidden;
+            }
+
+            //System Temps
+            if (Settings.Default.show_temps) {
+                configAndShowTemps();
+            }
+            else {
+                lbl_systemTemps.Visibility = Visibility.Hidden;
+            }
         }
 
         public static void destroyForms() {
@@ -80,9 +123,42 @@ namespace FullScreenStats {
             destroyForms();
         }
 
-        private void run_systemTime() {
-            
+        private void configAndShowTime() {
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
+                lbl_time.Content = DateTime.Now.ToString("dd MMMM yyyy\nHH:mm:ss");
+            }, Dispatcher);
+            lbl_time.Visibility = Visibility.Visible;
         }
 
+        private void configAndShowFPS() {
+            Display primaryDisplay = Display.GetDisplays()[0];          
+            PathTargetInfo targetInfo = new PathTargetInfo(primaryDisplay.DisplayDevice);
+
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
+                
+            }, Dispatcher);
+
+            
+            
+
+            //IClockFrequencies freqs = primaryDisplay.LogicalGPU.CorrespondingPhysicalGPUs[0].CurrentClockFrequencies;
+            //uint graphicsClockFreq = freqs.GraphicsClock.Frequency;
+            //uint videoDecodeClockFreq = freqs.VideoDecodingClock.Frequency;
+            //uint memoryClockFreq = freqs.MemoryClock.Frequency;
+            //uint processorClockFreq = freqs.ProcessorClock.Frequency;
+
+            //lbl_fps.Content = graphicsClockFreq + "\n" + videoDecodeClockFreq + "\n" + memoryClockFreq + "\n" + processorClockFreq;
+            lbl_fps.Visibility = Visibility.Visible;
+        }
+
+        private void configAndShowTemps() {
+            Display primaryDisplay = Display.GetDisplays()[0];
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
+                GPUThermalSensor sensor = primaryDisplay.PhysicalGPUs[0].ThermalInformation.ThermalSensors.First();
+                lbl_systemTemps.Content = "GPU Temp: " + sensor.CurrentTemperature + "\n";
+                
+            }, Dispatcher);
+            lbl_systemTemps.Visibility = Visibility.Visible;
+        }
     }
 }
