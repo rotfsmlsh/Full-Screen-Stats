@@ -14,24 +14,19 @@ using System.Windows.Shapes;
 
 namespace FullScreenStats {
     /// <summary>
-    /// Interaction logic for FSSWindow.xaml
+    /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class FSSWindow : Window {
-        public FSSWindow() {
+    public partial class IdentifierWindow : Window {
+        public IdentifierWindow() {
             InitializeComponent();
         }
-
-        public FSSWindow(String selectedMonitors, Color color) {
-            setColor(color);
+        public IdentifierWindow(String deviceName) {
             InitializeComponent();
+            txt_identifier.Text = deviceName;
         }
 
-        private void closeButton_Click(object sender, RoutedEventArgs e) {
-            this.Close();
-        }
-
-        public void setColor(Color selectedColor) {
-            Background = new SolidColorBrush(selectedColor);
+        private void btn_close_Click(object sender, RoutedEventArgs e) {
+            Close();
         }
     }
 }

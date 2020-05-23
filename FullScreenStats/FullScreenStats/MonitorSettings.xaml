@@ -1,0 +1,33 @@
+﻿<Window x:Name="window_displaySettings" x:Class="FullScreenStats.MonitorSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FullScreenStats"
+        mc:Ignorable="d"
+        Title="MonitorSettings" Height="371" Width="509" ResizeMode="NoResize" Topmost="True" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <GroupBox Header="Display Selection" HorizontalAlignment="Left" Height="265" Margin="10,10,0,0" VerticalAlignment="Top" Width="235">
+            <Grid Margin="10">
+                <ListBox x:Name="lstBox_monitors" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="203" SelectionMode="Multiple"/>
+                <Button x:Name="btn_identify" Content="Toggle Identify" HorizontalAlignment="Left" Margin="84,198,0,0" VerticalAlignment="Top" Width="109" Click="btn_identify_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Color Options" HorizontalAlignment="Left" Height="265" Margin="255,10,0,0" VerticalAlignment="Top" Width="235">
+            <Grid Margin="10">
+                <Grid Height="100" VerticalAlignment="Top">
+                    <Label x:Name="lbl_backgroundColor" Content="Background:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <RadioButton x:Name="rad_solidColor" Content="Solid Color" HorizontalAlignment="Left" Margin="17,33,0,0" VerticalAlignment="Top" IsChecked="True" />
+                    <RadioButton x:Name="rad_image" Content="Image" HorizontalAlignment="Left" Margin="17,53,0,0" VerticalAlignment="Top" />
+                    <Button x:Name="btn_configure" Content="Configure" HorizontalAlignment="Left" Margin="118,71,0,0" VerticalAlignment="Top" Width="75" Click="btn_configure_Click"/>
+                </Grid>
+                <Grid Margin="0,105,0,0" Height="100">
+                    <Label x:Name="lbl_font" Content="Font:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Height="53" Margin="10,26,0,0" TextWrapping="Wrap" Text="placeholder: add selection for font and size" VerticalAlignment="Top" Width="169" />
+                </Grid>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="btn_closeMonitorSettings" Content="Close" HorizontalAlignment="Left" Margin="415,300,0,0" VerticalAlignment="Top" Width="75" Click="btn_closeMonitorSettings_Click"/>
+
+    </Grid>
+</Window>
