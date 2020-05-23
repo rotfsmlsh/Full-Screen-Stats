@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfScreenHelper;
 
 namespace FullScreenStats {
     /// <summary>
@@ -21,29 +22,28 @@ namespace FullScreenStats {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+            //default selected monitor to primary display
+            if (Settings.Default.selected_monitors.Length == 0) {
+                Settings.Default.selected_monitors = "{" + Screen.PrimaryScreen.DeviceName + "}";
+            }
         }
 
         private void previewButton_Click(object sender, RoutedEventArgs e) {
-            FSSWindow window = new FSSWindow();
+            FSSWindow.destroyForms();
             if (Settings.Default.use_background_image == true) {
                 //set the background as an image
+                new FSSWindow(Settings.Default.selected_monitors, Settings.Default.use_background_image, Settings.Default.background_image);
             }
             else {
-            //    Color backgroundColor = (Color)ColorConverter.ConvertFromString(Settings.Default.background_color);
-              //  window.Background = new SolidColorBrush(backgroundColor);
+                new FSSWindow(Settings.Default.selected_monitors, Settings.Default.use_background_image, Settings.Default.background_color);
             }
-            window.setColor((Color)ColorConverter.ConvertFromString(Settings.Default.background_color));
-            window.Show();
         }
 
         private void btn_exit_Click(object sender, RoutedEventArgs e) {
             Close();
+            Settings.Default.Save();
             Environment.Exit(0);
         }
-
-        private void combo_color_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }     
 
         private void btn_monitorSelection_Click(object sender, RoutedEventArgs e) {
             MonitorSettings settings = new MonitorSettings();

@@ -9,7 +9,7 @@
     <Grid>
         <GroupBox Header="Display Selection" HorizontalAlignment="Left" Height="265" Margin="10,10,0,0" VerticalAlignment="Top" Width="235">
             <Grid Margin="10">
-                <ListBox x:Name="lstBox_monitors" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="203" SelectionMode="Multiple"/>
+                <ListBox x:Name="lstBox_monitors" HorizontalAlignment="Left" Height="163" VerticalAlignment="Top" Width="203" SelectionMode="Multiple" SelectionChanged="lstBox_monitors_SelectionChanged"/>
                 <Button x:Name="btn_identify" Content="Toggle Identify" HorizontalAlignment="Left" Margin="84,198,0,0" VerticalAlignment="Top" Width="109" Click="btn_identify_Click"/>
             </Grid>
         </GroupBox>

@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="selected_monitors" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">{}</Value>
     </Setting>
     <Setting Name="background_color" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">#b8b8b8</Value>
     </Setting>
     <Setting Name="show_fps" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

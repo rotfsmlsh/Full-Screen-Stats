@@ -25,7 +25,7 @@ namespace FullScreenStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{}")]
         public string selected_monitors {
             get {
                 return ((string)(this["selected_monitors"]));
@@ -37,7 +37,7 @@ namespace FullScreenStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("#b8b8b8")]
         public string background_color {
             get {
                 return ((string)(this["background_color"]));

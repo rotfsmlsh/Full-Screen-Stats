@@ -31,8 +31,6 @@ namespace FullScreenStats {
                 lstBox_monitors.Items.Add(screen.DeviceName);
                 connectedScreens.Add(screen);
             }
-            
-            //grab previous settings if available and populate
         }
 
         private void btn_closeMonitorSettings_Click(object sender, RoutedEventArgs e) {
@@ -43,7 +41,7 @@ namespace FullScreenStats {
                 identifierWindows.Clear();
                 showingIdentifier = false;
             }
-            Properties.Settings.Default.selected_monitors = lstBox_monitors.SelectedItems.ToString();
+            
             Close();
         }
 
@@ -75,7 +73,7 @@ namespace FullScreenStats {
                 OpenFileDialog fileChooser = new OpenFileDialog();
                 fileChooser.Title = "Select an image file...";
                 fileChooser.Filter = "Image files(*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
-                //fileChooser.ShowDialog();
+                fileChooser.ShowDialog();
                 String result = fileChooser.FileName;
                 Properties.Settings.Default.background_image = result;
                 Properties.Settings.Default.use_background_image = true;
@@ -93,6 +91,22 @@ namespace FullScreenStats {
                 Properties.Settings.Default.background_color = brush.ToString();
                 Topmost = true;
             }
+        }
+
+        private void lstBox_monitors_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            String selectedMonitorJson = "{";
+            int counter = 1;
+            foreach(String screenID in lstBox_monitors.SelectedItems) {
+                if (counter < lstBox_monitors.SelectedItems.Count) {
+                    selectedMonitorJson += screenID + ", ";
+                    counter++;
+                }
+                else {
+                    selectedMonitorJson += screenID;
+                }
+            }
+            selectedMonitorJson += "}";
+            Properties.Settings.Default.selected_monitors = selectedMonitorJson;
         }
     }
 }
