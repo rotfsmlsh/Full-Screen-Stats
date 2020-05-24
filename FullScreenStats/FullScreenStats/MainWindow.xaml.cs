@@ -26,6 +26,9 @@ namespace FullScreenStats {
             if (Settings.Default.selected_monitors.Length == 0) {
                 Settings.Default.selected_monitors = "{" + Screen.PrimaryScreen.DeviceName + "}";
             }
+            //populate check boxes from settings
+            populateMonitorSettingsText();
+            populateSettingsChecklist();
         }
 
         private void previewButton_Click(object sender, RoutedEventArgs e) {
@@ -46,11 +49,12 @@ namespace FullScreenStats {
         }
 
         private void btn_monitorSelection_Click(object sender, RoutedEventArgs e) {
-            MonitorSettings settings = new MonitorSettings();
+            MonitorSettings settings = new MonitorSettings(this);
             settings.Show();
         }
 
         private void chk_systemTime_Checked(object sender, RoutedEventArgs e) {
+            //Open dialog with chooser for format
             Settings.Default.show_systemTime = true;
         }
         private void chk_systemTime_Unchecked(object sender, RoutedEventArgs e) {
@@ -66,6 +70,7 @@ namespace FullScreenStats {
         }
 
         private void chk_systemTemps_Checked(object sender, RoutedEventArgs e) {
+            //GPU only for now, need to sort out CPU
             Settings.Default.show_temps = true;
         }
 
@@ -73,20 +78,30 @@ namespace FullScreenStats {
             Settings.Default.show_temps = false;
         }
 
-        private void chk_music_Unchecked(object sender, RoutedEventArgs e) {
-            Settings.Default.show_media = false;
+        //private void chk_music_Unchecked(object sender, RoutedEventArgs e) {
+        //    Settings.Default.show_media = false;
+        //}
+
+        //private void chk_music_Checked(object sender, RoutedEventArgs e) {
+        //    Settings.Default.show_media = true;
+        //}
+
+
+        private void populateSettingsChecklist() {
+            //chk_music.IsChecked = Settings.Default.show_media;
+            chk_systemTemps.IsChecked = Settings.Default.show_temps;
+            chk_network.IsChecked = Settings.Default.show_networkStats;
+            chk_systemTime.IsChecked = Settings.Default.show_systemTime;
         }
 
-        private void chk_music_Checked(object sender, RoutedEventArgs e) {
-            Settings.Default.show_media = true;
-        }
-        
-        private void chk_FPS_Checked(object sender, RoutedEventArgs e) {
-            Settings.Default.show_fps = true;
-        }
-        
-        private void chk_FPS_Unchecked(object sender, RoutedEventArgs e) {
-            Settings.Default.show_fps = false;
+        private void populateMonitorSettingsText() {
+            txt_selectedMonitors.Text = Settings.Default.selected_monitors;
+            if (Settings.Default.use_background_image) {
+                txt_selectedBackground.Text = Settings.Default.background_image;
+            }
+            else {
+                txt_selectedBackground.Text = Settings.Default.background_color;
+            }
         }
     }
 }

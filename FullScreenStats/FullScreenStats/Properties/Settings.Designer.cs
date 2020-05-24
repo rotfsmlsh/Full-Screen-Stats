@@ -130,5 +130,17 @@ namespace FullScreenStats.Properties {
                 this["use_background_image"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string global_font {
+            get {
+                return ((string)(this["global_font"]));
+            }
+            set {
+                this["global_font"] = value;
+            }
+        }
     }
 }

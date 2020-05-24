@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -125,7 +126,6 @@ namespace FullScreenStats {
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
                 GPUThermalSensor sensor = primaryDisplay.PhysicalGPUs[0].ThermalInformation.ThermalSensors.First();
                 lbl_systemTemps.Content = "GPU Temp: " + sensor.CurrentTemperature + "\n";
-                
             }, Dispatcher);
             lbl_systemTemps.Visibility = Visibility.Visible;
         }

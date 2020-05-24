@@ -1,4 +1,5 @@
 ﻿using ColorPickerWPF;
+using FullScreenStats.Properties;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,13 @@ namespace FullScreenStats {
     /// Interaction logic for MonitorSettings.xaml
     /// </summary>
     public partial class MonitorSettings : Window {
+        MainWindow mainWindow;
         List<Screen> connectedScreens = new List<Screen>();
         List<IdentifierWindow> identifierWindows = new List<IdentifierWindow>();
         bool showingIdentifier = false;
-        public MonitorSettings() {
+        public MonitorSettings(MainWindow window) {
             InitializeComponent();
-
+            mainWindow = window;
             foreach (Screen screen in Screen.AllScreens) {
                 lstBox_monitors.Items.Add(screen.DeviceName);
                 connectedScreens.Add(screen);
@@ -41,7 +43,18 @@ namespace FullScreenStats {
                 identifierWindows.Clear();
                 showingIdentifier = false;
             }
-            
+            if(lstBox_monitors.SelectedItems.Count > 0) {
+                mainWindow.txt_selectedMonitors.Text = "";
+            }
+            foreach (String screenID in lstBox_monitors.SelectedItems) {
+                mainWindow.txt_selectedMonitors.Text += screenID + "; ";
+            }
+            if (Settings.Default.use_background_image) {
+                mainWindow.txt_selectedBackground.Text = Settings.Default.background_image;
+            }
+            else {
+                mainWindow.txt_selectedBackground.Text = Settings.Default.background_color;
+            }
             Close();
         }
 
