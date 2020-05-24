@@ -1,13 +1,11 @@
 ﻿using FullScreenStats.Properties;
 using NvAPIWrapper.Display;
-using NvAPIWrapper.DRS.SettingValues;
 using NvAPIWrapper.GPU;
-using NvAPIWrapper.Native.Display.Structures;
-using NvAPIWrapper.Native.GPU.Structures;
-using NvAPIWrapper.Native.Interfaces.GPU;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -61,13 +59,13 @@ namespace FullScreenStats {
             Close();
         }
 
-        public void setColorFromString(String color) {
+        public void setColorFromString(string color) {
             if (color.Length > 0) {
-                Background = new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString(color));
+                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
             }
         }
 
-        public void setColor(System.Windows.Media.Color selectedColor) {
+        public void setColor(Color selectedColor) {
             Background = new SolidColorBrush(selectedColor);
         }
 
@@ -80,17 +78,9 @@ namespace FullScreenStats {
                 lbl_time.Visibility = Visibility.Hidden;
             }
 
-            //FPS display
-            if (Settings.Default.show_fps) {
-                configAndShowFPS();
-            }
-            else {
-                lbl_fps.Visibility = Visibility.Hidden;
-            }
-
             //Media control/info
             if (Settings.Default.show_media) {
-                lbl_media.Visibility = Visibility.Visible;
+                configAndShowMediaInfo();
             }
             else {
                 lbl_media.Visibility = Visibility.Hidden;
@@ -98,7 +88,7 @@ namespace FullScreenStats {
 
             //Network stats
             if (Settings.Default.show_networkStats) {
-                lbl_networkStats.Visibility = Visibility.Visible;
+                configAndShowNetworkStats();
             }
             else {
                 lbl_networkStats.Visibility = Visibility.Hidden;
@@ -130,27 +120,6 @@ namespace FullScreenStats {
             lbl_time.Visibility = Visibility.Visible;
         }
 
-        private void configAndShowFPS() {
-            Display primaryDisplay = Display.GetDisplays()[0];          
-            PathTargetInfo targetInfo = new PathTargetInfo(primaryDisplay.DisplayDevice);
-
-            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
-                
-            }, Dispatcher);
-
-            
-            
-
-            //IClockFrequencies freqs = primaryDisplay.LogicalGPU.CorrespondingPhysicalGPUs[0].CurrentClockFrequencies;
-            //uint graphicsClockFreq = freqs.GraphicsClock.Frequency;
-            //uint videoDecodeClockFreq = freqs.VideoDecodingClock.Frequency;
-            //uint memoryClockFreq = freqs.MemoryClock.Frequency;
-            //uint processorClockFreq = freqs.ProcessorClock.Frequency;
-
-            //lbl_fps.Content = graphicsClockFreq + "\n" + videoDecodeClockFreq + "\n" + memoryClockFreq + "\n" + processorClockFreq;
-            lbl_fps.Visibility = Visibility.Visible;
-        }
-
         private void configAndShowTemps() {
             Display primaryDisplay = Display.GetDisplays()[0];
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
@@ -159,6 +128,41 @@ namespace FullScreenStats {
                 
             }, Dispatcher);
             lbl_systemTemps.Visibility = Visibility.Visible;
+        }
+
+        private void configAndShowNetworkStats() {
+            if (!NetworkInterface.GetIsNetworkAvailable()) {
+                lbl_networkStats.Content = "Network information not available.";
+                lbl_networkStats.Visibility = Visibility.Visible;
+            }
+
+            NetworkInterface[] interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            float previousMBSent = 0f;
+            float previousMBReceived = 0f;
+            DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
+                string formattedNetworkStats = "";
+                foreach(NetworkInterface netInterface in interfaces) {
+                    if (netInterface.GetIPv4Statistics().BytesReceived > 0) {
+                        float mbSent = netInterface.GetIPv4Statistics().BytesSent / 1e+6f;
+                        float mbRecieved = netInterface.GetIPv4Statistics().BytesReceived / 1e+6f;
+                        formattedNetworkStats += "Network Interface: " + netInterface.Name;
+                        formattedNetworkStats += "\n  MB Sent      : " + netInterface.GetIPv4Statistics().BytesSent / 1e+6f;
+                        formattedNetworkStats += "\n  Send Rate    : " + String.Format("{0:0.00}", (mbSent - previousMBSent)) + "MB/s";
+                        formattedNetworkStats += "\n  MB Received  : " + netInterface.GetIPv4Statistics().BytesReceived /1e+6f;
+                        formattedNetworkStats += "\n  Recieve Rate : " + String.Format("{0:0.00}", (mbRecieved - previousMBReceived)) + "MB/s";
+                        formattedNetworkStats += "\n";
+                        previousMBReceived = mbRecieved;
+                        previousMBSent = mbSent;
+                    }
+                    lbl_networkStats.Content = formattedNetworkStats;
+                }
+            }, Dispatcher);
+
+            lbl_networkStats.Visibility = Visibility.Visible;
+        }
+
+        private void configAndShowMediaInfo() {
+            lbl_media.Visibility = Visibility.Visible;
         }
     }
 }

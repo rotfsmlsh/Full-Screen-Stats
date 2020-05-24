@@ -83,8 +83,6 @@
     <Compile Include="MonitorSettings.xaml.cs">
       <DependentUpon>MonitorSettings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SettingObject.cs" />
-    <Compile Include="SettingsSelection.cs" />
     <Compile Include="IdentifierWindow.xaml.cs">
       <DependentUpon>IdentifierWindow.xaml</DependentUpon>
     </Compile>

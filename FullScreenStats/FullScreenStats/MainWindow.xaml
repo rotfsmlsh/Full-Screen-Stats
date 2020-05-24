@@ -10,11 +10,10 @@
         <Button x:Name="btn_preview" Content="Preview" HorizontalAlignment="Left" Margin="215,0,0,10" Width="75" Click="previewButton_Click" Height="20" VerticalAlignment="Bottom"/>
         <GroupBox x:Name="statsGroup" Header="Stat Settings" HorizontalAlignment="Left" Height="160" Margin="10,10,0,0" VerticalAlignment="Top" Width="150">
             <Grid x:Name="grid_settings" Margin="10,0,2,2">
-                <CheckBox x:Name="chk_FPS" Content="FPS" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"                  Checked="chk_FPS_Checked"         Unchecked="chk_FPS_Unchecked"/>
-                <CheckBox x:Name="chk_network" Content="Network Traffic" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"  Checked="chk_network_Checked"     Unchecked="chk_network_Unchecked"/>
-                <CheckBox x:Name="chk_systemTime" Content="System Time" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"   Checked="chk_systemTime_Checked"  Unchecked="chk_systemTime_Unchecked"/>
-                <CheckBox x:Name="chk_systemTemps" Content="System Temps" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Checked="chk_systemTemps_Checked" Unchecked="chk_systemTemps_Unchecked"/>
-                <CheckBox x:Name="chk_music" Content="Music/Media" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"        Checked="chk_music_Checked"       Unchecked="chk_music_Unchecked"/>
+                <CheckBox x:Name="chk_network" Content="Network Traffic" HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top"  Checked="chk_network_Checked"     Unchecked="chk_network_Unchecked"/>
+                <CheckBox x:Name="chk_systemTime" Content="System Time" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"   Checked="chk_systemTime_Checked"  Unchecked="chk_systemTime_Unchecked"/>
+                <CheckBox x:Name="chk_systemTemps" Content="System Temps" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Checked="chk_systemTemps_Checked" Unchecked="chk_systemTemps_Unchecked"/>
+                <CheckBox x:Name="chk_music" Content="Music/Media" HorizontalAlignment="Left" Margin="10,73,0,0" VerticalAlignment="Top"        Checked="chk_music_Checked"       Unchecked="chk_music_Unchecked"/>
             </Grid>
         </GroupBox>
         <GroupBox x:Name="displayGroup" Header="Display Settings" Height="115" Margin="175,10,11,0" VerticalAlignment="Top">
