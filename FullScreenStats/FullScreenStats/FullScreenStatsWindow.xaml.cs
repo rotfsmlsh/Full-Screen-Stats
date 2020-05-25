@@ -3,6 +3,7 @@ using NvAPIWrapper.Display;
 using NvAPIWrapper.GPU;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -29,7 +30,9 @@ namespace FullScreenStats {
     /// </summary>
     public partial class FSSWindow : Window {
         static List<FSSWindow> openWindows = new List<FSSWindow>();
+        System.Windows.Media.FontFamily family;
         
+
         public FSSWindow(String selectedMonitors, bool useImage, String color) {
             foreach(Screen screen in Screen.AllScreens) {
                 if (selectedMonitors.Contains(screen.DeviceName)) {
@@ -39,6 +42,7 @@ namespace FullScreenStats {
         }
 
         private FSSWindow(Screen displayMonitor, String background) {
+            family = new System.Windows.Media.FontFamily(Settings.Default.global_font);
             InitializeComponent();
             if (Settings.Default.use_background_image) {
                 Uri path = new Uri(background);
@@ -62,11 +66,11 @@ namespace FullScreenStats {
 
         public void setColorFromString(string color) {
             if (color.Length > 0) {
-                Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+                Background = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(color));
             }
         }
 
-        public void setColor(Color selectedColor) {
+        public void setColor(System.Windows.Media.Color selectedColor) {
             Background = new SolidColorBrush(selectedColor);
         }
 
@@ -115,6 +119,8 @@ namespace FullScreenStats {
         }
 
         private void configAndShowTime() {
+            lbl_time.FontFamily = family;
+            lbl_time.FontSize = Settings.Default.global_font_size;
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
                 lbl_time.Content = DateTime.Now.ToString("dd MMMM yyyy\nHH:mm:ss");
             }, Dispatcher);
@@ -122,6 +128,8 @@ namespace FullScreenStats {
         }
 
         private void configAndShowTemps() {
+            lbl_systemTemps.FontFamily = family;
+            lbl_systemTemps.FontSize = Settings.Default.global_font_size;
             Display primaryDisplay = Display.GetDisplays()[0];
             DispatcherTimer timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate {
                 GPUThermalSensor sensor = primaryDisplay.PhysicalGPUs[0].ThermalInformation.ThermalSensors.First();
@@ -131,6 +139,8 @@ namespace FullScreenStats {
         }
 
         private void configAndShowNetworkStats() {
+            lbl_networkStats.FontFamily = family;
+            lbl_networkStats.FontSize = Settings.Default.global_font_size;
             if (!NetworkInterface.GetIsNetworkAvailable()) {
                 lbl_networkStats.Content = "Network information not available.";
                 lbl_networkStats.Visibility = Visibility.Visible;

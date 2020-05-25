@@ -21,9 +21,13 @@
                     <RadioButton x:Name="rad_image" Content="Image" HorizontalAlignment="Left" Margin="17,53,0,0" VerticalAlignment="Top" />
                     <Button x:Name="btn_configure" Content="Configure" HorizontalAlignment="Left" Margin="118,71,0,0" VerticalAlignment="Top" Width="75" Click="btn_configure_Click"/>
                 </Grid>
-                <Grid Margin="0,105,0,0" Height="100">
+                <Grid Margin="0,114,0,-11">
                     <Label x:Name="lbl_font" Content="Font:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="53" Margin="10,26,0,0" TextWrapping="Wrap" Text="placeholder: add selection for font and size" VerticalAlignment="Top" Width="169" />
+                    <Label x:Name="lbl_style" Content="Style: " HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" Width="64"/>
+                    <Label x:Name="lbl_size" Content="Size:" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btn_configFont" Content="Configure" HorizontalAlignment="Left" Margin="118,89,0,0" VerticalAlignment="Top" Width="75" Click="btn_configFont_Click"/>
+                    <TextBox x:Name="txt_fontStyle" HorizontalAlignment="Left" Height="23" Margin="69,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
+                    <TextBox x:Name="txt_fontSize" HorizontalAlignment="Left" Height="23" Margin="69,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
                 </Grid>
             </Grid>
         </GroupBox>

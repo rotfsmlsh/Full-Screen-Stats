@@ -33,6 +33,8 @@ namespace FullScreenStats {
                 lstBox_monitors.Items.Add(screen.DeviceName);
                 connectedScreens.Add(screen);
             }
+            txt_fontSize.Text = Settings.Default.global_font_size.ToString();
+            txt_fontStyle.Text = Settings.Default.global_font;
         }
 
         private void btn_closeMonitorSettings_Click(object sender, RoutedEventArgs e) {
@@ -87,21 +89,20 @@ namespace FullScreenStats {
                 fileChooser.Title = "Select an image file...";
                 fileChooser.Filter = "Image files(*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
                 fileChooser.ShowDialog();
-                String result = fileChooser.FileName;
-                Properties.Settings.Default.background_image = result;
-                Properties.Settings.Default.use_background_image = true;
+                string result = fileChooser.FileName;
+                Settings.Default.background_image = result;
+                Settings.Default.use_background_image = true;
             }
             else if (rad_solidColor.IsChecked == true) {
                 //open color chooser
-                Properties.Settings.Default.use_background_image = false;
+                Settings.Default.use_background_image = false;
                 ColorPickerWindow window = new ColorPickerWindow();
                 window.ToggleSimpleAdvancedView();
                 window.Topmost = true;
                 Topmost = false;
-                Color output;
-                ColorPickerWindow.ShowDialog(out output);
+                ColorPickerWindow.ShowDialog(out Color output);
                 SolidColorBrush brush = new SolidColorBrush(output);
-                Properties.Settings.Default.background_color = brush.ToString();
+                Settings.Default.background_color = brush.ToString();
                 Topmost = true;
             }
         }
@@ -119,7 +120,12 @@ namespace FullScreenStats {
                 }
             }
             selectedMonitorJson += "}";
-            Properties.Settings.Default.selected_monitors = selectedMonitorJson;
+            Settings.Default.selected_monitors = selectedMonitorJson;
+        }
+
+        private void btn_configFont_Click(object sender, RoutedEventArgs e) {
+            FontConfiguration config = new FontConfiguration(this);
+            config.Show();
         }
     }
 }

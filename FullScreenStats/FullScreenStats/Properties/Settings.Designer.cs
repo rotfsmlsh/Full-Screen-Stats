@@ -142,5 +142,41 @@ namespace FullScreenStats.Properties {
                 this["global_font"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("36")]
+        public int global_font_size {
+            get {
+                return ((int)(this["global_font_size"]));
+            }
+            set {
+                this["global_font_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool global_isBold {
+            get {
+                return ((bool)(this["global_isBold"]));
+            }
+            set {
+                this["global_isBold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool global_isItalic {
+            get {
+                return ((bool)(this["global_isItalic"]));
+            }
+            set {
+                this["global_isItalic"] = value;
+            }
+        }
     }
 }
