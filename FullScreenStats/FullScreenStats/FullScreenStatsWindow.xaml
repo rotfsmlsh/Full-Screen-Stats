@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FullScreenStats"
         mc:Ignorable="d"
-        Title="FSS Window" Height="450" Width="800" ResizeMode="NoResize">
+        Title="FSS Window" ShowInTaskbar="False" WindowStyle="None" HorizontalAlignment="Center" VerticalAlignment="Center" ResizeMode="NoResize">
     <Grid >
-        <Button x:Name="closeButton" Content="Close This" Margin="0,0,27,19" Click="closeButton_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="btn_closeThis" Content="Close This" Margin="0,0,27,19" Click="btn_closeThis_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Background="#FF4F4F4F" Foreground="#FFCDCDCD"/>
         <Label x:Name="lbl_time" Content="" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="110"/>
         <Label x:Name="lbl_networkStats" Content="" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Height="174"/>
         <Label x:Name="lbl_systemTemps" Content="" HorizontalAlignment="Right" Margin="0,10,10,0" Height="110" VerticalAlignment="Top"/>
         <Label x:Name="lbl_media" Content="" Margin="0,0,10,49" VerticalAlignment="Bottom" Height="135" HorizontalAlignment="Right"/>
-        <Button x:Name="btn_closeAll" Content="Close All" Margin="0,0,112,19" Click="btn_closeAll_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="btn_closeAll" Content="Close All" Margin="0,0,112,19" Click="btn_closeAll_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Background="#FF4F4F4F" Foreground="#FFCDCDCD"/>
     </Grid>
 </Window>

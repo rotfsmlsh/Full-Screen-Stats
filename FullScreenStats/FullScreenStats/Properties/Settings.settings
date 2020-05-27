@@ -30,7 +30,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="global_font" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Arial</Value>
     </Setting>
     <Setting Name="global_font_size" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">36</Value>

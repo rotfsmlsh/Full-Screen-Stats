@@ -133,7 +133,7 @@ namespace FullScreenStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Arial")]
         public string global_font {
             get {
                 return ((string)(this["global_font"]));

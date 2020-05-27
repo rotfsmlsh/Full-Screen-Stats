@@ -5,26 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FullScreenStats"
         mc:Ignorable="d"
-        Title="FSS" Width="483" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" MinWidth="400" MinHeight="200" Height="200">
+        Title="FSS" Width="483" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="201">
     <Grid>
-        <Button x:Name="btn_preview" Content="Show" HorizontalAlignment="Right" Margin="0,0,104,10" Width="75" Click="previewButton_Click" Height="20" VerticalAlignment="Bottom"/>
-        <GroupBox x:Name="statsGroup" Header="Stat Settings" HorizontalAlignment="Left" Height="115" Margin="10,10,0,0" VerticalAlignment="Top" Width="150">
+        <Button x:Name="btn_preview" Content="Show" HorizontalAlignment="Right" Margin="0,0,102,10" Width="75" Click="previewButton_Click" Height="20" VerticalAlignment="Bottom"/>
+        <GroupBox x:Name="statsGroup" Header="Stat Settings" HorizontalAlignment="Left" Margin="10,10,0,37" Width="150">
             <Grid x:Name="grid_settings" Margin="10,0,2,2">
                 <CheckBox x:Name="chk_network" Content="Network Traffic" HorizontalAlignment="Left" Margin="4,3,0,0" VerticalAlignment="Top"  Checked="chk_network_Checked"     Unchecked="chk_network_Unchecked"/>
                 <CheckBox x:Name="chk_systemTime" Content="System Time" HorizontalAlignment="Left" Margin="4,43,0,0" VerticalAlignment="Top"   Checked="chk_systemTime_Checked"  Unchecked="chk_systemTime_Unchecked"/>
                 <CheckBox x:Name="chk_systemTemps" Content="System Temps" HorizontalAlignment="Left" Margin="4,23,0,0" VerticalAlignment="Top" Checked="chk_systemTemps_Checked" Unchecked="chk_systemTemps_Unchecked"/>
             </Grid>
         </GroupBox>
-        <GroupBox x:Name="displayGroup" Header="Display Settings" Height="115" Margin="175,10,11,0" VerticalAlignment="Top">
+        <GroupBox x:Name="displayGroup" Header="Display Settings" Margin="175,10,11,37">
             <Grid Margin="10,0,10,2">
-                <Button x:Name="btn_monitorSelection" Content="Settings" Margin="0,68,0,0" VerticalAlignment="Top" Height="22" Click="btn_monitorSelection_Click" HorizontalAlignment="Right" Width="62" />
+                <Button x:Name="btn_monitorSelection" Content="Settings" Click="btn_monitorSelection_Click" HorizontalAlignment="Right" Width="62" Height="22" VerticalAlignment="Bottom" />
                 <Label x:Name="lbl_selectedMonitors" Content="Selected Monitors:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label x:Name="lbl_background" Content="Background: " HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
                 <TextBox x:Name="txt_selectedMonitors" HorizontalAlignment="Left" Height="23" Margin="114,3,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
                 <TextBox x:Name="txt_selectedBackground" HorizontalAlignment="Left" Height="23" Margin="114,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
             </Grid>
         </GroupBox>
-        <Button x:Name="btn_exit" Content="Quit" Margin="0,0,11,10" Click="btn_exit_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="83"/>
+        <Button x:Name="btn_exit" Content="Quit" Margin="0,0,10,10" Click="btn_exit_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="83"/>
 
     </Grid>
 </Window>
