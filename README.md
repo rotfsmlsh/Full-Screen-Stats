@@ -1,5 +1,7 @@
 # Full-Screen-Stats
 
+UPDATE FEB 2022: This was an abandoned project. I found something else that did the job better.
+
 So this whole thing started as a huge first-world problem. My giant second monitor was too bright. The goal was to create something that simply blocked out everything on that screen, but it turned into display of various stats.
 
 I've never published an application before, this might not be my first but we'll see.
